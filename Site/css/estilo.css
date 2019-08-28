@@ -1,0 +1,35 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    background-color: lightgreen;
+}
+
+.SobreNos{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 5%;
+    padding: 5%;
+    font-size: 20px;
+}
+
+.lbl{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    color: black;
+    width: 400px;
+}
+
+.botao{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: lightgrey;
+    color: black;
+    border-color: lightgrey;
+    border-radius: 10px;
+}
+
+.botao:hover{
+    color: white;
+    background-color: black;
+}
