@@ -4,7 +4,7 @@
 }
 
 body{
-    background-color: lightgreen;
+    background-color: #CEE29D;
 }
 
 .SobreNos{
@@ -49,4 +49,16 @@ body{
 
 .img2{
     float: right;
+}
+
+.card1{
+    background-color: #EEECE0;
+}
+
+.card2{
+    background-color: #EEECE0;
+}
+
+.nav-link{
+    font-size: 20px;
 }
