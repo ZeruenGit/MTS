@@ -51,3 +51,12 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+DROP TABLE IF EXISTS noticias;
+CREATE TABLE IF NOT EXISTS noticias(
+ codigo int auto_increment primary key not null,
+ titulo varchar(200) not null,
+ dat date not null,
+ autor varchar(200) not null,
+ texto text not null
+ );
