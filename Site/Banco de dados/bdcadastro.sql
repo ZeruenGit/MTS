@@ -1,4 +1,4 @@
-drop database if exists bdcadastro;
+
 create database if not exists bdcadastro;
 use bdcadastro;
 
@@ -33,26 +33,13 @@ SET time_zone = "+00:00";
 -- Estrutura da tabela `usuario`
 --
 
-DROP TABLE IF EXISTS `usuario`;
+
 CREATE TABLE IF NOT EXISTS `usuario` (
-  `email` varchar(200) NOT NULL,
-  `nome` varchar(200) NOT NULL,
-  PRIMARY KEY (`email`),
-  KEY `email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `email` varchar(200) primary key NOT NULL,
+  `nome` varchar(200) NOT NULL
+  );
 
---
--- Truncate table before insert `usuario`
---
 
-TRUNCATE TABLE `usuario`;SET FOREIGN_KEY_CHECKS=1;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-DROP TABLE IF EXISTS noticias;
 CREATE TABLE IF NOT EXISTS noticias(
  codigo int auto_increment primary key not null,
  titulo varchar(200) not null,
@@ -60,3 +47,5 @@ CREATE TABLE IF NOT EXISTS noticias(
  autor varchar(200) not null,
  texto text not null
  );
+ 
+ select * from usuario;
