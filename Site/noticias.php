@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Noticias</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/estilo.css">
 </head>
-
 <body>
 
-    <div class="container">
+<div class="container">
         <div class="row">
             <div class="col-sm">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -46,35 +44,62 @@
                 </nav>
             </div>
         </div>
+        <div class=dicas>
+        <?php
+        include_once('conexao.php');
+        //receber o número da página
+        $pagina_atual = filter_input(INPUT_GET,'pagina', FILTER_SANITIZE_NUMBER_INT);
+        $pagina =  (!empty ($pagina_atual))  ? $pagina_atual : 1;
+        
+        //setar a quantidade de itens por pagina
 
-        <div class="dicas">
-            <center>
-                <h1>Reciclagem</h1>
-            </center>
-            <p>
-                <h3>Dicas de Reciclagem:</h3>
+        $qnt_result_pagina = 2;
 
-                Devemos separar em casa três tipos de resíduos: lixo orgânico, lixo material não reciclável e lixo
-                material reciclável<br>
-                Lixo reciclável: limpe os recicláveis antes de jogar no seu devido lugar, potes e embalagens sujas podem
-                gerar odores desagradáveis, pode atrair insetos, ratos e outros animais.<br>
+        //calcular o inicio da visualização
+        $inicio = ($qnt_result_pagina * $pagina) - $qnt_result_pagina;
 
-                Devem ser entregues em locais apropriados: Equipamentos eletrônicos, pilhas, baterias de celular e
-                lâmpadas, alguns estabelecimentos comerciais recolhem estes produtos que serão encaminhados à empresas
-                que fazem o descarte de forma apropriada, sem prejudicar o meio ambiente.<br>
+        //mostrar a notícia
+        $result_noticias = "SELECT * FROM noticias LIMIT $inicio, $qnt_result_pagina";
+        $resultado_noticias = mysqli_query($conexao, $result_noticias);
+        
+        while($row_noticia = mysqli_fetch_assoc($resultado_noticias)){
+            echo "Titulo: " . $row_noticia['titulo'] . "<br><br>";
+            echo "Autor: " . $row_noticia['autor'] . "<br>";
+            echo "Data: " . $row_noticia['dat'] . "<br><br>";
+            echo "Texto: " . $row_noticia['texto'] . "<br><br><hr>";
+        }
 
-                Materiais que você pode separar na coleta seletiva e encaminhar para a reciclagem: potes, garrafas e
-                embalagens de plástico e vidro, papel sulfite, jornais, papelão, revistas, embalagens de metal,
-                materiais de ferro, garrafas PET, sacos plásticos, canos de plástico ou metal, tecidos, couro, fios
-                elétricos, pregos e parafusos.<br>
+        //Paginação - Somar a quantidade de noticias
+        $result_pg = "SELECT COUNT(codigo) AS num_result FROM noticias";
+        $resultado_pg = mysqli_query($conexao, $result_pg);
+        $row_pg = mysqli_fetch_assoc($resultado_pg);
+        //echo $row_pg['num_result'];
 
-                Materiais não recicláveis: papel carbono, papel celofane, etiquetas adesivas, fitas adesivas,
-                fotografias, latas de tinta e verniz, esponjas de aço, embalagens metalizadas, espumas, cabo de panela,
-                esponjas de limpeza, embalagens de produtos tóxicos, vidros temperados, espelhos, porcelana, cerâmica,
-                vidros refratários, cristais e isopor.
-            </p>
-        </div>
+        //Quantidade de paginas
+        $quantidade_pg = ceil($row_pg['num_result'] / $qnt_result_pagina);
 
+        //Limitar os links antes e depois
+        $max_links = 2;
+        echo "<a href='noticias.php?pagina=1'> Primeira </a>";
+
+        for($pag_ant = $pagina - $max_links; $pag_ant <= $pagina - 1; $pag_ant++){
+            if($pag_ant >= 1){
+            echo "<a href='noticias.php?pagina=$pag_ant'>$pag_ant </a>";
+        }
+    }
+
+        echo "$pagina";
+
+        for($pag_dep = $pagina + 1; $pag_dep <= $pagina + $max_links; $pag_dep ++){
+            if($pag_dep <= $quantidade_pg){
+                echo "<a href='noticias.php?pagina=$pag_dep'>$pag_dep </a>";
+            }
+        }
+
+        echo "<a href='noticias.php?pagina=$quantidade_pg'> Ultima </a>";
+       
+       ?>
+    </div>
+    </div>
 </body>
-
 </html>
