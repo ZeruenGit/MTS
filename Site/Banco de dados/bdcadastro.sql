@@ -40,12 +40,21 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   );
 
 
+ 
+CREATE TABLE IF NOT EXISTS adm_user(
+idUser int primary key not null auto_increment,
+user varchar(200) not null,
+pass varchar(200) not null,
+nome varchar(200) not null);
+
 CREATE TABLE IF NOT EXISTS noticias(
  codigo int auto_increment primary key not null,
  titulo varchar(200) not null,
  dat date not null,
  autor varchar(200) not null,
- texto text not null
- );
+ texto text not null,
+ constraint fk_noticia_autor foreign key  (autor) references admin(user));
  
- select * from usuario;
+ insert into adm_user (user, pass, nome)
+ VALUES ('adm', md5('adminmtspass'),'Matheus Rodrigues Aguilar');
+ 
