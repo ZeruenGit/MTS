@@ -30,7 +30,7 @@
             
             if($count == 1) {
                 $_SESSION['login_user'] = $username;
-                header("location: cadastrar_noticias.html");
+                header("location: cadastrar_noticias.php");
             }else {
                 $loginerror = "O nome de usuario ou senha estão incorretos";
             }
@@ -39,7 +39,6 @@
 
     <div class="login">
     <h1>login</h1>
-    <img src="assets/Logo1.png">
         <form action="" method="post">
             <input type="text" name="user" placeholder="User" autocomplete="off">
             <input type="password" name="pass" placeholder=Password autocomplete="off">

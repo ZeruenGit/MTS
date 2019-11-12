@@ -13,6 +13,13 @@
 </head>
 
 <body>
+<?php
+        if(isset($_GET['logout']) == true){
+            session_destroy();
+            header("Location: index.php");
+            die();
+        }
+        ?>
         <div class="container">
                 <div class="row">
                     <div class="col-sm">
@@ -40,12 +47,19 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="cadastro.html">Cadastre-se</a>
                                     </li>
+                                    <li class="nav-item admin">
+                                        <a class="nav-link" href="admin.php">Logar como admin</a>
+                                    </li>
                                 </ul>
                             </div>
                         </nav>
                     </div>
                 </div>
-
+                <div>
+                    <a href="#?logout=true">
+                        Logout
+                    </a>
+                </div>
 <form action="cadastrando.php" method="POST">
 
     Titulo: <input type="text" name="titulo"></input><br><br><br><br>

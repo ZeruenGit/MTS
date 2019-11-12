@@ -23,25 +23,26 @@
 
 </head>
 <body>
-    <input type="submit" value="ENVIAR" onClick="enviarTodos()">
+   Assunto (Título): <input type="text" id='assunto'><br><br>
+   Texto: <br> <textarea cols="100" rows="10" id="mensagem" style="margin:25px;" ></textarea>
+    <input type="submit" value="ENVIAR" onClick="enviar(document.getElementById('assunto').value, document.getElementById('mensagem').value)">
 
     <script type="text/javascript">
+
     const usuarios = JSON.parse(' <?php echo json_encode($rows); ?>');
-        function enviarTodos(){
+        function enviar(assunto, mensagem){
+            console.log(usuarios)
             usuarios.forEach( user =>{
-            enviar(user.email, `Olha ${user.nome}`, `Bomdia`)
-        })
-        }
-        function enviar(email, mensagem, assunto){
-            Email.send({
-                SecureToken : "3ca17337-03b3-4200-8689-c0a653da2661",
-                To : email,
+                Email.send({
+                Host : "smtp.gmail.com",
+                Username : "mataosustentavel@gmail.com",
+                Password : "projetomts",
+                To : user.email,
                 From : "mataosustentavel@gmail.com",
-                Subject : assunto,
+                Subject : `Oi ${user.nome}, ${assunto}`,
                 Body : mensagem
-            }).then(
-                message => alert(message)
-            );
+                }).then(message => alert(message));
+            })
         }
     </script>
     
