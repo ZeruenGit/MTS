@@ -3,9 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="shortcut icon" href="assets/Logo2.png" type="image/x-icon">
-    <title>SFA | Login</title>
 </head>
 <body>
     <?php
@@ -40,8 +37,8 @@
     <div class="login">
     <h1>login</h1>
         <form action="" method="post">
-            <input type="text" name="user" placeholder="User" autocomplete="off">
-            <input type="password" name="pass" placeholder=Password autocomplete="off">
+            <input type="text" name="user" placeholder="user" autocomplete="off">
+            <input type="password" name="pass" placeholder=pass autocomplete="off">
             <input type="submit" value="Login">
         </form>
         <label><?php echo @$loginerror; ?></label>
