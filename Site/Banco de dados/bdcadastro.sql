@@ -51,10 +51,9 @@ CREATE TABLE IF NOT EXISTS noticias(
  codigo int auto_increment primary key not null,
  titulo varchar(200) not null,
  dat date not null,
- autor varchar(200) not null,
+ autor int not null,
  texto text not null,
- constraint fk_noticia_autor foreign key  (autor) references admin(user));
+ constraint fk_noticia_autor foreign key  (autor) references adm_user(user));
  
- insert into adm_user (user, pass, nome)
- VALUES ('adm', md5('adminmtspass'),'Matheus Rodrigues Aguilar');
+
  

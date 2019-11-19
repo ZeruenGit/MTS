@@ -11,11 +11,10 @@
     include_once('conexao.php');
     $titulo=$_POST['titulo'];
     $dat=$_POST['dat'];
-    $autor=$_POST['autor'];
     $texto=$_POST['texto'];
 
-    $sqlinsert = "insert into noticias (titulo, dat, autor, texto) 
-    VALUES ('$titulo', '$dat', '$autor', '$texto')";
+    $sqlinsert = "insert into noticias (titulo, autor, dat, texto) 
+    VALUES ('$titulo','null' , '$dat', '$texto')";
 
     $resultado = @mysqli_query($conexao, $sqlinsert);
 	if (!$resultado) {

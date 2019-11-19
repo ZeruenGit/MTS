@@ -10,6 +10,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/estilo.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+    .text-center {
+        text-align: center;
+      }
+      body {
+        background: #CEE29D;
+      }
+      </style>
 </head>
 <body>
 
@@ -36,6 +44,9 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="noticias.php">Notícias</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="coleta.html">Pontos de Coletas</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="cadastro.html">Cadastre-se</a>
@@ -68,7 +79,6 @@
         
         while($row_noticia = mysqli_fetch_assoc($resultado_noticias)){
             echo "Titulo: " . $row_noticia['titulo'] . "<br><br>";
-            echo "Autor: " . $row_noticia['autor'] . "<br>";
             echo "Data: " . $row_noticia['dat'] . "<br><br>";
             echo "Texto: " . $row_noticia['texto'] . "<br><br><hr>";
         }

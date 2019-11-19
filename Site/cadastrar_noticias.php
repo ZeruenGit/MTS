@@ -1,3 +1,11 @@
+<?php
+include('session.php');
+
+if (!isset($_SESSION['login_user'])) {
+    header("Location: index.html");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -11,21 +19,17 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/estilo.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+    .text-center {
+        text-align: center;
+      }
+      body {
+        background: #CEE29D;
+      }
+      </style>
 </head>
 
 <body>
-<?php
-
-if(!isset($_SESSION['login_user'])){
-    header("location:admin.php");
-    die();
-}
-        if(isset($_GET['logout']) == true){
-            session_destroy();
-            header("Location: index.php");
-            die();
-        }
-        ?>
         <div class="container">
                 <div class="row">
                     <div class="col-sm">
@@ -51,10 +55,16 @@ if(!isset($_SESSION['login_user'])){
                                         <a class="nav-link" href="noticias.php">Notícias</a>
                                     </li>
                                     <li class="nav-item">
+                                        <a class="nav-link" href="coleta.html">Pontos de coleta</a>
+                                    </li>
+                                    <li class="nav-item">
                                         <a class="nav-link" href="cadastro.html">Cadastre-se</a>
                                     </li>
                                     <li class="nav-item admin">
                                         <a class="nav-link" href="admin.php">Logar como admin</a>
+                                    </li>
+                                    <li class="nav-item logout">
+                                        <a class="nav-link" href="logout.php">Encerrar sessão</a>
                                     </li>
                                 </ul>
                             </div>
@@ -62,15 +72,10 @@ if(!isset($_SESSION['login_user'])){
                     </div>
                 </div>
                 <div>
-                    <a href="#?logout=true">
-                        Logout
-                    </a>
                 </div>
 <form action="cadastrando.php" method="POST">
 
     Titulo: <input type="text" name="titulo"></input><br><br><br><br>
-
-    Autor: <input type="text" name="autor"></input><br><br><br>
     
     Texto:<br>
     
@@ -78,9 +83,8 @@ if(!isset($_SESSION['login_user'])){
 
     Data de publicação: <input type="date" name="dat"></input><br><br><br><br>
 
-    <input type="submit" name="enviar" value="Enviar" >
-
-
+    <input class="btn btn-primary" type="submit" value="Enviar">
+    <a class="btn btn-primary" href="enviar-email.php" role="button">Enviar para pessoas cadastradas</a>
 </form>
 
 </body>

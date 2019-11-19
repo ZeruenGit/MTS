@@ -1,48 +1,50 @@
+<?php
+include('admin2.php'); //incluí o script de login
+
+if(isset($_SESSION['login_user'])){
+  header("Location: cadastrar_noticias.php"); //Redireciona para a página de cadastro de noticias
+}
+?>
 <!DOCTYPE html>
-<html lang="pt-br">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login MTS</title>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<style>
+.text-center {
+  text-align: center;
+}
+body {
+  margin-top: 100px;
+  background: #CEE29D;
+}
+</style>
 </head>
 <body>
-    <?php
-        session_start();
-
-        require_once("conexao.php");
-
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $username = mysqli_real_escape_string($conexao, $_POST["user"]);
-            $userpass = md5(mysqli_real_escape_string($conexao, $_POST["pass"]));
-
-            $query = "SELECT idUser FROM adm_user WHERE user = '$username' and pass = '$userpass'";
-
-            $result = mysqli_query($conexao, $query);
-
-            if($result){
-                $row = mysqli_fetch_array($result);
-                $active = $row['active'];
-            }
-
-            $count = mysqli_num_rows($result);
-            
-            if($count == 1) {
-                $_SESSION['login_user'] = $username;
-                header("location: cadastrar_noticias.php");
-            }else {
-                $loginerror = "O nome de usuario ou senha estão incorretos";
-            }
-        }
-    ?>
-
-    <div class="login">
-    <h1>login</h1>
-        <form action="" method="post">
-            <input type="text" name="user" placeholder="user" autocomplete="off">
-            <input type="password" name="pass" placeholder=pass autocomplete="off">
-            <input type="submit" value="Login">
+<div class="container">
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading text-center"><h4>Login</h4></div>
+		<div class="panel-body">
+		<form action="admin2.php" method="post">
+          <div class="form-group">
+            <label for="usr">Usuário:</label>
+            <input type="text" name="username" placeholder="Username" class="form-control" id="usr">
+          </div>
+          <div class="form-group">
+            <label for="pwd">Senha:</label>
+            <input type="password" name="password" placeholder="Password" class="form-control" id="pwd">
+          </div>
+        <input type="submit" class="btn btn-primary" name="submit" value="Login">
         </form>
-        <label><?php echo @$loginerror; ?></label>
+		</div>
     </div>
-    
+  </div>
+</div>
 </body>
 </html>
