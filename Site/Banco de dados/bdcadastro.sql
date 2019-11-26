@@ -52,8 +52,6 @@ CREATE TABLE IF NOT EXISTS noticias(
  titulo varchar(200) not null,
  dat date not null,
  autor int not null,
- texto text not null,
- constraint fk_noticia_autor foreign key  (autor) references adm_user(user));
- 
+ texto text not null);
 
  

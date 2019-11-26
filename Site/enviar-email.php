@@ -74,9 +74,6 @@ if(!isset($_SESSION['login_user'])){
                                     <li class="nav-item">
                                         <a class="nav-link" href="coleta.html">Pontos de coleta</a>
                                     </li>
-                                    <li class="nav-item admin">
-                                        <a class="nav-link" href="admin.php">Logar como admin</a>
-                                    </li>
                                     <li class="nav-item logout">
                                         <a class="nav-link" href="logout.php">Encerrar sessão</a>
                                     </li>

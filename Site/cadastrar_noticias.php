@@ -60,9 +60,6 @@ if (!isset($_SESSION['login_user'])) {
                                     <li class="nav-item">
                                         <a class="nav-link" href="cadastro.html">Cadastre-se</a>
                                     </li>
-                                    <li class="nav-item admin">
-                                        <a class="nav-link" href="admin.php">Logar como admin</a>
-                                    </li>
                                     <li class="nav-item logout">
                                         <a class="nav-link" href="logout.php">Encerrar sessão</a>
                                     </li>
@@ -73,6 +70,7 @@ if (!isset($_SESSION['login_user'])) {
                 </div>
                 <div>
                 </div>
+                <div class="formulario">
 <form action="cadastrando.php" method="POST">
 
     Titulo: <input type="text" name="titulo"></input><br><br><br><br>
@@ -86,7 +84,7 @@ if (!isset($_SESSION['login_user'])) {
     <input class="btn btn-primary" type="submit" value="Enviar">
     <a class="btn btn-primary" href="enviar-email.php" role="button">Enviar para pessoas cadastradas</a>
 </form>
-
+    </div>
 </body>
 
 </html>
