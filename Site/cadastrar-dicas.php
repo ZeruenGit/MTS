@@ -1,3 +1,11 @@
+<?php
+include('session.php');
+
+if (!isset($_SESSION['login_user'])) {
+    header("Location: index.html");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -6,19 +14,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Dicas Sustentáveis</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/estilo.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <style>
         .text-center {
             text-align: center;
-          }
-          body {
+        }
+
+        body {
             background: #CEE29D;
-          }
-          </style>
+        }
+    </style>
 </head>
 
 <body>
@@ -29,9 +37,7 @@
                     <a class="navbar-left d-flex logo" href="index.html">
                         <img src="./imagens/logo.png" alt="" style="width: 70%;">
                     </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse"
-                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
@@ -52,6 +58,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="cadastro.html">Cadastre-se</a>
                             </li>
+                            <li class="nav-item logout">
+                                <a class="nav-link" href="logout.php">Encerrar sessão</a>
+                            </li>
                         </ul>
                     </div>
                 </nav>
@@ -63,8 +72,8 @@
                     <img src="./imagens/agua.png" class="card-img-top card1" alt="...">
                     <div class="card-body card1">
                         <h5 class="card-title card1"></h5>
-                        <p class="card-text card1">Acesse aqui para ter dicas sobre consumo sustentável de água.</p>
-                        <a href="agua.php"><button type="button" class="btn btn-success">Ver dicas</button></a>
+                        <p class="card-text card1">Clique aqui para cadastrar as dicas.</p>
+                        <a href="agua-cadastro.php"><button type="button" class="btn btn-success">Cadastrar dicas</button></a>
                     </div>
                 </div>
             </div>
@@ -73,8 +82,8 @@
                     <img src="./imagens/consumo.png" class="card-img-top card2" alt="...">
                     <div class="card-body card2">
                         <h5 class="card-title card2"></h5>
-                        <p class="card-text card2">Acesse aqui para ter dicas sobre consumo sustentável de produtos.</p>
-                        <a href="consumo.php"><button type="button" class="btn btn-success">Ver dicas</button></a>
+                        <p class="card-text card2">Clique aqui para cadastrar as dicas.</p>
+                        <a href="consumo-cadastro.php"><button type="button" class="btn btn-success">Cadastrar dicas</button></a>
                     </div>
                 </div>
             </div>
@@ -83,8 +92,8 @@
                     <img src="./imagens/energia.png" class="card-img-top card1" alt="...">
                     <div class="card-body card1">
                         <h5 class="card-title card1"></h5>
-                        <p class="card-text card1">Acesse aqui para ter dicas sobre consumo sustentável de energia.</p>
-                        <a href="energia.php"><button type="button" class="btn btn-success">Ver dicas</button></a>
+                        <p class="card-text card1">Clique aqui para cadastrar as dicas.</p>
+                        <a href="energia-cadastro.php"><button type="button" class="btn btn-success">Cadastrar dicas</button></a>
                     </div>
                 </div>
             </div>
@@ -93,8 +102,8 @@
                     <img src="./imagens/reciclagem.png" class="card-img-top card2" alt="...">
                     <div class="card-body card2">
                         <h5 class="card-title card2"></h5>
-                        <p class="card-text card2">Acesse aqui para ter dicas sobre reciclagem.</p>
-                        <a href="reciclagem.php"><button type="button" class="btn btn-success">Ver dicas</button></a>
+                        <p class="card-text card2">Clique aqui para cadastrar as dicas.</p>
+                        <a href="reciclagem-cadastro.php"><button type="button" class="btn btn-success">Cadastrar dicas</button></a>
                     </div>
                 </div>
             </div>
@@ -102,15 +111,9 @@
     </div>
     <!-- JavaScript (Opcional) -->
     <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 
 </html>

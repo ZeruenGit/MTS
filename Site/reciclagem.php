@@ -1,29 +1,27 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Água</title>
+    <title>Noticias</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/estilo.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <style>
-        .text-center {
-            text-align: center;
-        }
-
-        body {
-            background: #CEE29D;
-        }
-    </style>
+    .text-center {
+        text-align: center;
+      }
+      body {
+        background: #CEE29D;
+      }
+      </style>
 </head>
-
 <body>
-    <div class="container">
+
+<div class="container">
         <div class="row">
             <div class="col-sm">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -48,7 +46,7 @@
                                 <a class="nav-link" href="noticias.php">Notícias</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="coleta.html">Pontos de coleta</a>
+                                <a class="nav-link" href="coleta.html">Pontos de Coletas</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="cadastro.html">Cadastre-se</a>
@@ -58,36 +56,61 @@
                 </nav>
             </div>
         </div>
-        <div>
-        </div>
-        <div class="dicas">
-                <p class="titulo">ÁGUA</p>
-            <p class="subtitulo">
-                Faça a captação, aproveite a água da chuva:</p>
-            <p class="corpo">Utilize a agua da chuva para a lavagem de quintais, ajudando também o meio ambiente e sua
-                fatura no final
-                do
-                mês</p>
+        <div class=dicas>
+            <center><h1>RECICLAGEM</h1></center>
+        <?php
+        include_once('conexao.php');
+        //receber o número da página
+        $pagina_atual = filter_input(INPUT_GET,'pagina', FILTER_SANITIZE_NUMBER_INT);
+        $pagina =  (!empty ($pagina_atual))  ? $pagina_atual : 1;
+        
+        //setar a quantidade de itens por pagina
 
-                <p class="subtitulo">
-                    Elimine vazamentos:</p>
-                    <p class="corpo">Evita aumento na conta de água sem o uso, e o desperdício.
-                Para evitar o consumo exagerado de água, aqui vão alguns defeitos e dicas de como resolvê-los</p>
-                <p><img src="./imagens/tabelaagua.png" width="100%" height="100%"></p>
-                <p><img src="./imagens/tabelaagua2.png" width="100%" height="100%"></p>
+        $qnt_result_pagina = 2;
 
-        </div>
-        <!-- JavaScript (Opcional) -->
-        <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-            crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-            crossorigin="anonymous"></script>
+        //calcular o inicio da visualização
+        $inicio = ($qnt_result_pagina * $pagina) - $qnt_result_pagina;
+
+        //mostrar as inserções
+        $result_noticias = "SELECT * FROM reciclagem LIMIT $inicio, $qnt_result_pagina";
+        $resultado_noticias = mysqli_query($conexao, $result_noticias);
+        
+        while($row_noticia = mysqli_fetch_assoc($resultado_noticias)){
+            echo "<b>" . $row_noticia['titulo'] . "</b><br><br>";
+            echo "" . $row_noticia['texto'] . "<br><br><hr>";
+        }
+
+        //Paginação - Somar a quantidade de inserções
+        $result_pg = "SELECT COUNT(cod) AS num_result FROM reciclagem";
+        $resultado_pg = mysqli_query($conexao, $result_pg);
+        $row_pg = mysqli_fetch_assoc($resultado_pg);
+        //echo $row_pg['num_result'];
+
+        //Quantidade de paginas
+        $quantidade_pg = ceil($row_pg['num_result'] / $qnt_result_pagina);
+
+        //Limitar os links antes e depois
+        $max_links = 2;
+        echo "<a href='reciclagem.php?pagina=1'> Primeira </a>";
+
+        for($pag_ant = $pagina - $max_links; $pag_ant <= $pagina - 1; $pag_ant++){
+            if($pag_ant >= 1){
+            echo "<a href='reciclagem.php?pagina=$pag_ant'>$pag_ant </a>";
+        }
+    }
+
+        echo "$pagina";
+
+        for($pag_dep = $pagina + 1; $pag_dep <= $pagina + $max_links; $pag_dep ++){
+            if($pag_dep <= $quantidade_pg){
+                echo "<a href='reciclagem.php?pagina=$pag_dep'>$pag_dep </a>";
+            }
+        }
+
+        echo "<a href='reciclagem.php?pagina=$quantidade_pg'> Ultima </a>";
+       
+       ?>
+    </div>
+    </div>
 </body>
-
 </html>

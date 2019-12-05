@@ -45,7 +45,7 @@ body {
             <label for="pwd">Senha:</label>
             <input type="password" name="password" placeholder="Password" class="form-control" id="pwd">
           </div>
-        <input type="submit" class="botao" name="submit" value="Login">
+        <input type="submit" class="btn btn-success" name="submit" value="Login">
         </form>
 		</div>
     </div>

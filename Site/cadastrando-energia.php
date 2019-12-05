@@ -10,11 +10,10 @@
 <?php
     include_once('conexao.php');
     $titulo=$_POST['titulo'];
-    $dat=$_POST['dat'];
     $texto=$_POST['texto'];
 
-    $sqlinsert = "insert into noticias (titulo, autor, dat, texto) 
-    VALUES ('$titulo',null , '$dat', '$texto')";
+    $sqlinsert = "insert into energia (titulo, texto) 
+    VALUES ('$titulo', '$texto')";
 
     $resultado = @mysqli_query($conexao, $sqlinsert);
 	if (!$resultado) {

@@ -1,28 +1,27 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Consumo</title>
+    <title>Noticias</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/estilo.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <style>
-        .text-center {
-            text-align: center;
-          }
-          body {
-            background: #CEE29D;
-          }
-          </style>
+    .text-center {
+        text-align: center;
+      }
+      body {
+        background: #CEE29D;
+      }
+      </style>
 </head>
-
 <body>
-    <div class="container">
+
+<div class="container">
         <div class="row">
             <div class="col-sm">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -47,7 +46,7 @@
                                 <a class="nav-link" href="noticias.php">Notícias</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="coleta.html">Pontos de coleta</a>
+                                <a class="nav-link" href="coleta.html">Pontos de Coletas</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="cadastro.html">Cadastre-se</a>
@@ -57,24 +56,61 @@
                 </nav>
             </div>
         </div>
-        <div class="dicas">
-            <center>
-                <h1>CONSUMO</h1>
-            </center>
-            <p>Diminua o uso de descartáveis:<br>
+        <div class=dicas>
+            <center><h1>CONSUMO</h1></center>
+        <?php
+        include_once('conexao.php');
+        //receber o número da página
+        $pagina_atual = filter_input(INPUT_GET,'pagina', FILTER_SANITIZE_NUMBER_INT);
+        $pagina =  (!empty ($pagina_atual))  ? $pagina_atual : 1;
+        
+        //setar a quantidade de itens por pagina
 
-            Procure utilizar refis ao invés de embalagens descartáveis, evite também o uso excessivo de embrulho em produtos.</p>
+        $qnt_result_pagina = 2;
 
-            <ul>
-                <li><b>Consuma apenas o necessário: é possível viver com menos. Reflita sobre suas necessidades reais.</b></li>
-                <li><b>Avalie os impactos do que consome, ao comprar, leve em conta danos que a fabricação e o
-                     uso do produto causam ao meio ambiente e à sociedade.</b> </li>
-                <li><b>Reutilize produtos e embalagens, se você pode consertar, transformar e reutilizar, por quer comprar outra vez?</b></li>
-                <li><b>Valorize a responsabilidade social das empresas, o valor de um produto vai além de seu preço e sua qualidade.
-                     Ele pode incluir a responsabilidade do fabricante com funcionários, sociedade e meio ambiente.</b></li>
-            </ul>
+        //calcular o inicio da visualização
+        $inicio = ($qnt_result_pagina * $pagina) - $qnt_result_pagina;
 
-        </div>
+        //mostrar as inserções
+        $result_noticias = "SELECT * FROM consumo LIMIT $inicio, $qnt_result_pagina";
+        $resultado_noticias = mysqli_query($conexao, $result_noticias);
+        
+        while($row_noticia = mysqli_fetch_assoc($resultado_noticias)){
+            echo "<b>" . $row_noticia['titulo'] . "</b><br><br>";
+            echo "" . $row_noticia['texto'] . "<br><br><hr>";
+        }
+
+        //Paginação - Somar a quantidade de inserções
+        $result_pg = "SELECT COUNT(cod) AS num_result FROM consumo";
+        $resultado_pg = mysqli_query($conexao, $result_pg);
+        $row_pg = mysqli_fetch_assoc($resultado_pg);
+        //echo $row_pg['num_result'];
+
+        //Quantidade de paginas
+        $quantidade_pg = ceil($row_pg['num_result'] / $qnt_result_pagina);
+
+        //Limitar os links antes e depois
+        $max_links = 2;
+        echo "<a href='consumo.php?pagina=1'> Primeira </a>";
+
+        for($pag_ant = $pagina - $max_links; $pag_ant <= $pagina - 1; $pag_ant++){
+            if($pag_ant >= 1){
+            echo "<a href='consumo.php?pagina=$pag_ant'>$pag_ant </a>";
+        }
+    }
+
+        echo "$pagina";
+
+        for($pag_dep = $pagina + 1; $pag_dep <= $pagina + $max_links; $pag_dep ++){
+            if($pag_dep <= $quantidade_pg){
+                echo "<a href='consumo.php?pagina=$pag_dep'>$pag_dep </a>";
+            }
+        }
+
+        echo "<a href='consumo.php?pagina=$quantidade_pg'> Ultima </a>";
+       
+       ?>
+    </div>
+    </div>
 </body>
-
 </html>

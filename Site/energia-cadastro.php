@@ -71,19 +71,15 @@ if (!isset($_SESSION['login_user'])) {
                 <div>
                 </div>
                 <div class="formulario">
-<form action="cadastrando.php" method="POST">
+<form action="cadastrando-energia.php" method="POST">
 
-    <h3>Titulo:</h3> <input type="text" name="titulo"></input><br><br><br><br>
+    <h3>Titulo ou Subtitulo:</h3> <input type="text" name="titulo"></input><br><br><br><br>
     
     <h3>Texto:</h3><br>
     
     <textarea cols="100" rows="10" name="texto" style="margin:25px;" ></textarea><br><br><br><br>
 
-    <h3>Data de publicação:</h3> <input type="date" name="dat"></input><br><br><br><br>
-
     <input class="btn btn-success" type="submit" value="Enviar">
-    <a class="btn btn-success" href="enviar-email.php" role="button">Enviar para pessoas cadastradas</a>
-    <a class="btn btn-success" href="cadastrar-dicas.php" role="button">Cadastrar Dicas</a>
 </form>
     </div>
 </body>

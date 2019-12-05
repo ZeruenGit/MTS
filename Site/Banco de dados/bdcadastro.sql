@@ -51,7 +51,6 @@ CREATE TABLE IF NOT EXISTS noticias(
  codigo int auto_increment primary key not null,
  titulo varchar(200) not null,
  dat date not null,
- autor int not null,
+ autor int,
  texto text not null);
-
  

@@ -84,9 +84,9 @@ if(!isset($_SESSION['login_user'])){
                 </div>
                 <div>
                 </div>
-   Assunto (Título): <input type="text" id='assunto'><br><br>
-   Texto: <br> <textarea cols="100" rows="10" id="mensagem" style="margin:25px;" ></textarea>
-    <input type="submit" value="ENVIAR" onClick="enviar(document.getElementById('assunto').value, document.getElementById('mensagem').value)">
+   <h3>Assunto (Título):</h3> <input type="text" id='assunto'><br><br>
+   <h3>Texto:</h3> <br> <textarea cols="100" rows="10" id="mensagem" style="margin:25px;" ></textarea><br>
+    <input type="submit" class="btn btn-success" value="ENVIAR" onClick="enviar(document.getElementById('assunto').value, document.getElementById('mensagem').value)">
 
     <script type="text/javascript">
 
@@ -100,7 +100,7 @@ if(!isset($_SESSION['login_user'])){
                 Password : "projetomts",
                 To : user.email,
                 From : "mataosustentavel@gmail.com",
-                Subject : `Oi ${user.nome}, ${assunto}`,
+                Subject : `Olá ${user.nome}, ${assunto}`,
                 Body : mensagem
                 }).then(message => alert(message));
             })

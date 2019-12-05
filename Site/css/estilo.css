@@ -32,21 +32,7 @@ body{
     font-weight: bold;
 }
 
-.botaocoleta{
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: darkgreen;
-    color: lightgrey;
-    border-radius: 10px;
-   
-    font-weight: bold;
-}
-
 .botao:hover{
-    color: black;
-    background-color: lightgreen;
-}
-
-.botaocoleta:hover{
     color: black;
     background-color: lightgreen;
 }
@@ -77,4 +63,30 @@ body{
 
 .nav-link{
     font-size: 20px;
+}
+
+.titulo{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    font-style: normal;
+    color:black;
+    text-align: center;
+    font-weight: bold;
+}
+
+.subtitulo{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    color:black;
+    text-align: left;
+    font-weight: bold;
+}
+
+.corpo{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    color:black;
+    text-align: justify;
 }

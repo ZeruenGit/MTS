@@ -75,9 +75,9 @@
         $resultado_noticias = mysqli_query($conexao, $result_noticias);
         
         while($row_noticia = mysqli_fetch_assoc($resultado_noticias)){
-            echo "Titulo: " . $row_noticia['titulo'] . "<br><br>";
-            echo "Data: " . $row_noticia['dat'] . "<br><br>";
-            echo "Texto: " . $row_noticia['texto'] . "<br><br><hr>";
+            echo "<b>" . $row_noticia['titulo'] . "</b><br><br>";
+            echo "" . $row_noticia['dat'] . "<br><br>";
+            echo "" . $row_noticia['texto'] . "<br><br><hr>";
         }
 
         //Paginação - Somar a quantidade de noticias
